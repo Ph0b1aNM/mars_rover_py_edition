@@ -1,37 +1,59 @@
-# mars_rover_worker will handle all variable calculations that are passed through
+# coding: utf-8
 
+"""
+Mars Rover embedded software.
+"""
+
+import logging
 from enum import Enum
 
-class Direction(Enum):
+
+logger = logging.getLogger('MarsRover')
+
+
+class Heading(Enum):
     N = 1
     E = 2
     S = 3
     W = 4
+
 
 class Command(Enum):
     L = 1
     R = 2
     M = 3
 
-class Plateau_Grid(object):
 
+class Plateau(object):
+    """
+    Basic representation to help with coordinates validation.
+    """
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        return super().__init__(x , y)
+        self.axis_x_extension = range(self.x + 1)
+        self.axis_y_extension = range(self.y + 1)
 
-class Rover_move(object):
+    def validate(self, x, y):
+        """
+        Verifies if coordinates are inside the limits.
+        """
+        return x in self.axis_x_extension and y in self.axis_y_extension
 
-    def __init__(self, x, y, direction, plateau_grid):
+
+class Rover(object):
+    """
+    Automated vehicle used to explore the red planet.
+    """
+    def __init__(self, x, y, heading, plateau):
         self.x = x
         self.y = y
-        self.direction = direction
-        self.plateau_grid = plateau_grid
-        return super().__init__(x, y, direction, plateau_grid)
+        self.heading = heading
+        self.plateau = plateau
 
     def __str__(self):
         return '{0} {1} {2}'.format(
-            self.x, self.y, self.direction.name)
+            self.x, self.y, self.heading.name)
 
     def _get_coordinates(self):
         return (self.x, self.y,)
