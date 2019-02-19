@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+# Importing MRInput model.
+
+from .models import MRInput
+
+# Registration of MRInput model.
+
+admin.site.register(MRInput)
