@@ -11,6 +11,7 @@ This Project is being written in Python 3.7.2.
 Install the following dependancies:
 
   - Django 2.1.7
+  - django-crispy-forms 1.7.2
 
 ```sh
 Example Box
