@@ -1,15 +1,8 @@
-#!/usr/bin/env python3
-
 from Rover import Rover, directions
 from Mars import Mars
 import re
 
-
 def validate_int(x, y):
-    """
-    Validate that the two parameters are integers.
-    Re-used multiple times during the execution.
-    """
     try:
         if int(x) >= 0 and int(y) >= 0:
             return True
@@ -17,15 +10,7 @@ def validate_int(x, y):
         print("Only numerical elements. Try again!")
         return False
 
-
 def validate_rover(x, y, direction):
-    """
-    Validates a rover to ensure the parameters are
-    correct datatypes(int, int, string).
-    It also controls ensures that the integers
-    are inside the Mars surface and that the
-    supplied direction is a correct direction.
-    """
     try:
 
         if validate_int(x, y) and direction in directions:
@@ -37,14 +22,6 @@ def validate_rover(x, y, direction):
     return False
 
 def validate_operations(op):
-    """
-    Uses regex to validate that
-    the supplied string only contains
-    'M', 'R' and 'L'.
-
-    Raises a ValueError if incorrect
-    operation(s) have been supplied.
-    """
     pattern = re.compile("^[MRL]*$")
 
     if pattern.match(op):
@@ -53,15 +30,6 @@ def validate_operations(op):
         raise ValueError("Only values 'L', 'M' or 'R' accepted!")
 
 def move(op, r):
-    """
-    Uses the supplied operations
-    and moves the rover according to
-    the string of operations.
-
-    If a rover goes out of bounds it is
-    returned to its initial position
-    (where it was initialized at).
-    """
     try:
         for operation in op:
             if operation == "L":
@@ -77,16 +45,6 @@ Try again!\n>>> ".format(err, r.initial[0], r.initial[1], r.initial[2]))
         move(op, r)
 
 def add_rover(mars):
-    """
-    Taking a reference to Mars
-    this function asks for user input.
-    The user input is then validate.
-    If it passes validation a new Rover
-    is created and returned.
-    If the input doesn't pass validation
-    the user is prompted to enter a
-    new Rover.
-    """
     while True:
         rover = None
         try:
@@ -101,17 +59,6 @@ def add_rover(mars):
             return rover
 
 def move_rover(rover, mars):
-    """
-    Taking the created rover and mars
-    the function then asks for user input.
-    The input is validated and then
-    sent to move() which then performs
-    the operations.
-
-    The Rover is then added to the
-    occupied spaces on Mars and a
-    new Rover will be prompted.
-    """
     while True:
         moved = False
         try:
@@ -130,11 +77,6 @@ def move_rover(rover, mars):
             return
 
 def go_end(mars):
-    """
-    This function simply gives a pretty output
-    of all the Rovers on Mars surface.
-    Then exits the application.
-    """
     print("--------------- Output ---------------")
     for rover in mars.occupied:
         print("{} {} {}".format(rover[0], rover[1], rover[2]))
@@ -143,29 +85,11 @@ def go_end(mars):
     exit()
 
 def check_if_exit(iput, mars):
-    """
-    Every input taken after setting up Mars will
-    use this function to check if the input
-    contains 'exit'.
-
-    If it contains 'exit' it the go_end
-    function will be called.
-    """
     if "exit".upper() in iput.upper():
         go_end(mars)
     return iput
 
 def main ():
-
-    """
-    The brains of the code.
-
-    Uses a few while loops to validate
-    user input and to make the code more user friendly.
-
-    An exit when prompted will print the rover's positions.
-    """
-
     inactivate_loop = False
 
     while (not inactivate_loop): # will loop until Mars has been initialized.
@@ -181,8 +105,6 @@ def main ():
     while True:
             rover = add_rover(mars)       # Initiate a rover with the supplied input. Each rover is assigned to a Mars (many-to-one relation).
             move_rover(rover, mars)
-
-
 
 if __name__ == "__main__":
     main()
