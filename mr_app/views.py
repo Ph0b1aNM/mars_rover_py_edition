@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import InputForm
 
@@ -11,6 +11,10 @@ def input(request):
         if form.is_valid():
             print("VALID")
             form.save()
-
+            return HttpResponseRedirect('success/')
     form = InputForm()
     return render(request, 'form.html', {'form': form})
+
+def success(request):
+    return HttpResponse("placeholder")
+
