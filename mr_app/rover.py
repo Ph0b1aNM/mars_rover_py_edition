@@ -32,7 +32,7 @@ It should be value should be < 0 and > {}""".format(str(self.Mars.x)))
     y = property(operator.attrgetter('_y'))
 
     @y.setter
-    
+
     def y(self, y):
         if (y < 0 or y > self.Mars.y):
             raise ValueError("This rover's y-valueis out of bounds.\
