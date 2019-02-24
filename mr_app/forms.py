@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit
+from crispy_forms.layout import Layout, Submit, Fieldset, ButtonHolder, Field
 from django import forms
 from .models import MRInput
 
@@ -19,7 +19,7 @@ class InputForm(forms.ModelForm):
             'r2px', 
             'r2py', 
             'r2pface', 
-            'inst2',
+            Field('inst2', css_class='pb-5'),
             Submit('submit', 'Submit', css_class='btn-success')
         )
 

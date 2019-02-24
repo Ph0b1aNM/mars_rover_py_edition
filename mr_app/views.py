@@ -3,7 +3,9 @@ from django.shortcuts import render
 from .forms import InputForm
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the mr_app index.")
+    if request.method == 'NEXT':
+        return HttpResponseRedirect('input/')
+    return render(request, 'index.html')
 
 def input(request):
     if request.method == 'POST':
