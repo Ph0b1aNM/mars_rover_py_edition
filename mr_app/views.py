@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.forms.formsets import formset_factory
 from .models import MRInput
 from .forms import InputForm
 import sqlite3
@@ -29,15 +30,16 @@ def input(request):
     return render(request, 'form.html', {'form': form})
 
 def success(request):
-    return HttpResponse("success placeholder")
+    form_user_in = InputForm()
+    user_inputs = MRInput.objects.all().first()
+    args = {'form': form_user_in, 'user_inputs': user_inputs}
+    if(request.GET.get('next-calc-btn')):
+        return HttpResponseRedirect('/index/current_position/')
+    return render(request, 'success.html', args)
 
 def del_view(request):
     if(request.GET.get('sure-delete')):
-        #c.execute('SELECT * FROM mr_app_mrinput')
         c.execute('DELETE FROM mr_app_mrinput')
         conn.commit()
-        #data = c.fetchall()
         return HttpResponseRedirect('/index/')
-        #return HttpResponse(str(data))
     return render(request, 'del_view.html')
-

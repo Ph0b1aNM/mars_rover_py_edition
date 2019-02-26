@@ -1,5 +1,5 @@
-from Rover import Rover, directions
-from Mars import Mars
+from lib.Rover import Rover, directions
+from lib.Mars import Mars
 import re
 
 def validate_int(x, y):
