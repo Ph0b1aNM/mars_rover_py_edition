@@ -1,6 +1,6 @@
 from django.db import models
 
-# Mars Rover Input Table
+# Mars Rover Input Model
 
 class MRInput(models.Model):
     sopx = models.IntegerField(default=0)

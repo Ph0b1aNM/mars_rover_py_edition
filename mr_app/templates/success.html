@@ -10,16 +10,24 @@
   <body style="padding: 20px;">
     <h1>Welcome to The Mars Rover Tech Challenge</h1>
     <h3>The following data has been collected:</h3>
-
-    {% for user_inputs in user_inputs %}
-        <h3>{{ user_inputs.user_inputs }}</h3>
-    {% endfor %}
-
-    <h3>placeholder</h3>
     <br>
-    <h3>Please click Next to Calculate the positions of the Mars Rovers:</h3>
+        <h5>Size of Plateau X: {{ user_inputs.sopx }}</h5>
+        <h5>Size of Plateau Y: {{ user_inputs.sopy }}</h5>
+        <h5>Rover 1 X Position: {{ user_inputs.r1px }}</h5>
+        <h5>Rover 1 Y Position: {{ user_inputs.r1py }}</h5>
+        <h5>Rover 1 Facing Direction: {{ user_inputs.r1pface }}</h5>
+        <h5>Rover 1 Instruction Set: {{ user_inputs.inst1 }}</h5>
+        <h5>Rover 2 X Position: {{ user_inputs.r2px }}</h5>
+        <h5>Rover 2 Y Position: {{ user_inputs.r2py }}</h5>
+        <h5>Rover 2 Facing Direction: {{ user_inputs.r2pface }}</h5>
+        <h5>Rover 2 Instruction Set: {{ user_inputs.inst2 }}</h5>
     <br>
       <form action="#" method="get">
+      <h3>Please click Back to change the above data if needed:</h3>
+        <input type="submit" class="btn btn-success" value="Back" name="back-succ-btn">
+        <br>
+        <br>
+      <h3>Or Please click Next to Calculate the positions of the Mars Rovers:</h3>
         <input type="submit" class="btn btn-success" value="Next" name="next-calc-btn">
       </form>
   </body>

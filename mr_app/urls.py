@@ -7,4 +7,5 @@ urlpatterns = [
     path('index/del_view/', views.del_view, name='del_view'),
     path('index/input/', views.input, name='input'),
     path('index/success/', views.success, name='success'),
+    path('index/current_position/<do_calc>', views.current_position, name='current_position'),
 ]
