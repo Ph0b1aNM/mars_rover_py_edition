@@ -61,3 +61,7 @@ def current_position(request, do_calc):
             mars = Mars(int(sopx1), int(sopy1))
         else:
             print("Incorrect input. Please ensure you enter a string with two numerical elements")
+
+    # Must add and complete methods for adding rover and then moving rover.
+    #rover = add_rover(mars)       # Initiate a rover with the supplied input. Each rover is assigned to a Mars (many-to-one relation).
+    #move_rover(rover, mars)
