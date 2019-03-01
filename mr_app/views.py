@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.forms.formsets import formset_factory
 from .models import MRInput
 from .forms import InputForm
-from .worker import Mars
+from .worker import Mars, Rover, directions
 import sqlite3
 
 #with sqlite3.connect('db.sqlite3') as conn:
@@ -61,6 +61,10 @@ def current_position(request, do_calc):
             mars = Mars(int(sopx1), int(sopy1))
         else:
             print("Incorrect input. Please ensure you enter a string with two numerical elements")
+
+def rover_do():
+    rover = add_rover(mars)# Initiate a rover with the supplied input. Each rover is assigned to a Mars (many-to-one relation).
+    move_rover(rover, mars)
 
     # Must add and complete methods for adding rover and then moving rover.
     #rover = add_rover(mars)       # Initiate a rover with the supplied input. Each rover is assigned to a Mars (many-to-one relation).
