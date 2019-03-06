@@ -10,9 +10,11 @@ import sqlite3
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 c = conn.cursor()
 
+# Redirect URL localhost:8000 to /index/
 def redirect_index(request):
     return HttpResponseRedirect('index/')
 
+# Welcome page with instructions and two redirects
 def index(request):
     if(request.GET.get('next-btn')):
         return HttpResponseRedirect('input/')
@@ -20,6 +22,7 @@ def index(request):
         return HttpResponseRedirect('del_view/')
     return render(request, 'index.html')
 
+# Input form view, based from MRInput model. SQL ensures uppercase is saved to db for all strings
 def input(request):
     if request.method == 'POST':
         form = InputForm(request.POST)
@@ -31,10 +34,12 @@ def input(request):
     form = InputForm()
     return render(request, 'form.html', {'form': form})
 
+# Success view, to visualy allow user to validate input data, includes two redirects
 def success(request):
     user_inputs = MRInput.objects.all().first()
     args = {'user_inputs': user_inputs}
     if(request.GET.get('next-calc-btn')):
+        # Should call function to start calculation !!!!!!!!!!!!!!!!!!!!!!!!!
         return redirect('/index/current_position/proceed')
     elif(request.GET.get('back-succ-btn')):
         c.execute('DELETE FROM mr_app_mrinput')
@@ -42,6 +47,7 @@ def success(request):
         return HttpResponseRedirect('/index/input')
     return render(request, 'success.html', args)
 
+# View to allow user to delete previous data input
 def del_view(request):
     if(request.GET.get('sure-delete')):
         c.execute('DELETE FROM mr_app_mrinput')
@@ -49,6 +55,7 @@ def del_view(request):
         return HttpResponseRedirect('/index/')
     return render(request, 'del_view.html')
 
+# Worker view, calculations are processed here
 def current_position(request, do_calc):
     #if(do_calc == 'proceed'):
     #    return HttpResponse('Test if statement: ' + str(do_calc))
